@@ -108,23 +108,65 @@ public class SortingAlgorithms {
         arr[k] = temp;
     }
 
+    public static void mergeSort(Comparable[] arr) {
+        if(arr.length < 2) {
+            return;
+        }
+
+        int midpoint = arr.length / 2;
+        Comparable[] leftHalf = new Comparable[midpoint];
+        Comparable[] rightHalf = new Comparable[arr.length - midpoint];
+
+        for(int i = 0; i < midpoint; i++) {
+            leftHalf[i] = arr[i];
+        }
+        for(int i = midpoint; i < arr.length; i++) {
+            rightHalf[i - midpoint] = arr[i];
+        }
+
+        mergeSort(leftHalf);
+        mergeSort(rightHalf);
+
+        merge(arr, leftHalf, rightHalf);
+    }
+
+    private static void merge(Comparable[] arr, Comparable[] leftHalf, Comparable[] rightHalf) {
+        int leftPointer = 0, rightPointer = 0, mergedArrPointer = 0;
+
+        while(leftPointer < leftHalf.length && rightPointer < rightHalf.length) {
+            if(leftHalf[leftPointer].compareTo(rightHalf[rightPointer]) <= 0) {
+                arr[mergedArrPointer] = leftHalf[leftPointer++];
+            } else {
+                arr[mergedArrPointer] = rightHalf[rightPointer++];
+            }
+            mergedArrPointer++;
+        }
+        while(leftPointer < leftHalf.length) {
+            arr[mergedArrPointer++] = leftHalf[leftPointer++];
+        }
+        while(rightPointer < rightHalf.length) {
+            arr[mergedArrPointer++] = rightHalf[rightPointer++];
+        }
+    }
+
     public static void main(String[] args) {
         Random rnd = new Random();
-        Comparable[] arr = new Comparable[10];
+        Comparable[] arr = new Comparable[100000000];
 
         for(int i = 0; i < arr.length; i++) {
-            arr[i] = rnd.nextInt(500);
-            System.out.printf("| %d ", arr[i]);
+            arr[i] = rnd.nextInt(100);
+            System.out.print("| " + arr[i]);
         }
         System.out.printf("|\n");
 
         //selectionSort(arr);
         //insertionSort(arr);
         //shellSort(arr);
-        quicksort(arr);
+        //quicksort(arr);
+        mergeSort(arr);
 
         for(Comparable i : arr) {
-            System.out.printf("| %d ", i);
+            System.out.printf("| " + i);
         }
         System.out.printf("|\n");
     }
