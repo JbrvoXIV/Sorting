@@ -149,25 +149,67 @@ public class SortingAlgorithms {
         }
     }
 
+    public static void radixSort(int[] arr) { // unfinished
+        if(arr.length <= 1)
+            return;
+
+        final int BUCKETS = 10;
+        int maxDigitLength = digitLength(arr);
+
+    }
+
+    private static int digitLength(int[] arr) {
+
+        int maxLength = 1, maxVal = Integer.MIN_VALUE;
+
+        for(int i = 0; i < arr.length; i++) {
+            if(Math.abs(arr[i]) > maxVal)
+                maxVal = Math.abs(arr[i]);
+        }
+
+        while(maxVal >= 10) {
+            maxVal /= 10;
+            maxLength++;
+        }
+
+        return maxLength;
+    }
+
+    public static void bubbleSort(Comparable[] arr) {
+        for(int i = 0; i < arr.length - 1; i++) {
+            for(int j = 0; j < arr.length - i - 1; j++) {
+                if(arr[j].compareTo(arr[j + 1]) > 0) {
+                    Comparable temp = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Random rnd = new Random();
-        Comparable[] arr = new Comparable[100000000];
+        Comparable[] arr = new Comparable[10];
 
         for(int i = 0; i < arr.length; i++) {
             arr[i] = rnd.nextInt(100);
-            System.out.print("| " + arr[i]);
+            System.out.print(" | " + arr[i]);
         }
-        System.out.printf("|\n");
+        System.out.println(" |");
 
         //selectionSort(arr);
         //insertionSort(arr);
         //shellSort(arr);
         //quicksort(arr);
-        mergeSort(arr);
+        //mergeSort(arr);
+        bubbleSort(arr);
 
+//        for(Comparable i : arr) {
+//            System.out.printf("| " + i);
+//        }
         for(Comparable i : arr) {
-            System.out.printf("| " + i);
+            System.out.print(" | " + i);
         }
-        System.out.printf("|\n");
+        System.out.println(" |");
     }
 }
