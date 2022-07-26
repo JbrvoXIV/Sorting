@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SortingAlgorithms {
+public final class SortingAlgorithms {
 
     public static void selectionSort(Comparable[] arr) { // O(N^2)
 
@@ -149,25 +149,4 @@ public class SortingAlgorithms {
         }
     }
 
-    public static void main(String[] args) {
-        Random rnd = new Random();
-        Comparable[] arr = new Comparable[100000000];
-
-        for(int i = 0; i < arr.length; i++) {
-            arr[i] = rnd.nextInt(100);
-            System.out.print("| " + arr[i]);
-        }
-        System.out.printf("|\n");
-
-        //selectionSort(arr);
-        //insertionSort(arr);
-        //shellSort(arr);
-        //quicksort(arr);
-        mergeSort(arr);
-
-        for(Comparable i : arr) {
-            System.out.printf("| " + i);
-        }
-        System.out.printf("|\n");
-    }
 }
